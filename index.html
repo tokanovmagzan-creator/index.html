@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#170615">
+
+<title>Ақнұр ♡ С днём рождения!</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+:root {
+    --pink: #ff72c6;
+    --light: #ffd2ee;
+    --white: #fff5fc;
+    --deep: #170615;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 50% 45%,
+        #42102f 0%,
+        #25091f 40%,
+        #10050f 100%);
+    color: var(--white);
+    font-family: 'Comfortaa', sans-serif;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#space {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    touch-action: none;
+}
+
+.vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 35%,
+        rgba(9, 2, 10, 0.42) 100%
+    );
+}
+
+.glow {
+    position: fixed;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: #ff35ad;
+    filter: blur(110px);
+    opacity: 0.12;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.content {
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+.top {
+    padding-top: max(37px, env(safe-area-inset-top));
+    animation: fadeDown 1.5s ease both;
+}
+
+.small-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #ffa3df;
+    opacity: 0.9;
+}
+
+.title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(48px, 13vw, 76px);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #ffe5f6;
+    margin-top: 15px;
+    text-shadow:
+        0 0 12px rgba(255, 105, 200, .8),
+        0 0 35px rgba(255, 52, 170, .5);
+}
+
+.subtitle {
+    color: #ffc5e7;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-top: 12px;
+}
+
+.center-space {
+    flex: 1;
+    min-height: 60px;
+}
+
+.bottom {
+    width: 100%;
+    max-width: 360px;
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+    animation: fadeUp 1.8s ease both;
+}
+
+.message {
+    color: #ffdbf0;
+    font-size: 12px;
+    line-height: 1.95;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 14px #ff4eb7;
+    margin-bottom: 19px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    pointer-events: auto;
+}
+
+.btn {
+    border: 1px solid rgba(255, 184, 228, .52);
+    border-radius: 999px;
+    color: white;
+    background: rgba(255, 105, 194, .12);
+    padding: 13px 19px;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 11px;
+    letter-spacing: .3px;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 25px rgba(255, 68, 179, .1);
+    transition: .3s;
+}
+
+.btn:active {
+    transform: scale(.95);
+}
+
+.btn.primary {
+    color: #4a1035;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffd8f0, #ff80cd);
+    border: none;
+    box-shadow: 0 0 25px rgba(255, 105, 194, .32);
+}
+
+.hint {
+    color: rgba(255, 206, 236, .55);
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-top: 19px;
+}
+
+.signature {
+    margin-top: 17px;
+    font-family: 'Great Vibes', cursive;
+    color: #ffb8e3;
+    font-size: 27px;
+    text-shadow: 0 0 15px #ff45b8;
+}
+
+.heart-symbol {
+    display: inline-block;
+    color: #ff8acb;
+    animation: heartbeat 1.8s infinite;
+}
+
+.modal {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    background: rgba(10, 1, 10, .78);
+    backdrop-filter: blur(12px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    pointer-events: auto;
+}
+
+.modal.show {
+    display: flex;
+    animation: appear .35s ease both;
+}
+
+.letter {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 25px;
+    padding: 32px 23px;
+    text-align: center;
+    background: linear-gradient(
+        145deg,
+        rgba(94, 22, 70, .97),
+        rgba(35, 7, 30, .98)
+    );
+    border: 1px solid rgba(255, 159, 218, .55);
+    box-shadow:
+        0 0 45px rgba(255, 57, 173, .2),
+        inset 0 0 28px rgba(255, 118, 197, .05);
+}
+
+.letter-heart {
+    font-size: 40px;
+    margin-bottom: 14px;
+    animation: heartbeat 1.5s infinite;
+}
+
+.letter h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 44px;
+    font-weight: 400;
+    color: #ffc1e6;
+    margin-bottom: 18px;
+}
+
+.letter p {
+    font-size: 12px;
+    line-height: 2;
+    color: #ffe5f5;
+}
+
+.letter .btn {
+    margin-top: 23px;
+}
+
+.float-heart {
+    position: fixed;
+    z-index: 3;
+    pointer-events: none;
+    color: #ff95d8;
+    text-shadow: 0 0 15px #ff45ba;
+    animation: floatUp 3.8s ease-out forwards;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.13); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.08); }
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(.6) rotate(0);
+    }
+    20% { opacity: 1; }
+    100% {
+        opacity: 0;
+        transform: translateY(-65vh) scale(1.5) rotate(30deg);
+    }
+}
+
+@media (max-height: 690px) {
+    .top { padding-top: 22px; }
+    .title { font-size: clamp(43px, 11vw, 63px); margin-top: 8px; }
+    .subtitle { margin-top: 7px; }
+    .bottom { padding-bottom: 18px; }
+    .message { margin-bottom: 12px; line-height: 1.7; }
+    .hint { margin-top: 12px; }
+    .signature { margin-top: 9px; font-size: 23px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glow"></div>
+
+<canvas id="space"></canvas>
+
+<div class="vignette"></div>
+
+<div class="content">
+
+    <header class="top">
+        <div class="small-label">
+            A LITTLE UNIVERSE FOR YOU
+        </div>
+
+        <h1 class="title">
+            С днём рождения,<br>
+            Ақнұр
+            <span class="heart-symbol">♡</span>
+        </h1>
+
+        <p class="subtitle">
+            БҮГІН — СЕНІҢ ЕРЕКШЕ КҮНІҢ
+        </p>
+    </header>
+
+    <div class="center-space"></div>
+
+    <section class="bottom">
+
+        <p class="message">
+            Әлемдегі ең әдемі тілектер саған арналсын. ♡<br>
+            Әр күнің қуанышқа, жүрегің бақытқа толсын.<br>
+            Армандарың орындалып, жүзіңнен күлкі кетпесін.
+        </p>
+
+        <div class="buttons">
+
+            <button class="btn primary" id="musicButton">
+                ♫ Әуенді қосу
+            </button>
+
+            <button class="btn" id="letterButton">
+                💌 Саған хат бар
+            </button>
+
+        </div>
+
+        <p class="hint">
+            ✧ ЖҮРЕКТІ САУСАҒЫҢМЕН АЙНАЛДЫР ✧
+        </p>
+
+        <div class="signature">
+            With love, for Ақнұр ♡
+        </div>
+
+    </section>
+</div>
+
+<!-- МУЗЫКА ФАЙЛЫ ОСЫ ЖЕРДЕ ҚОСЫЛҒАН -->
+<audio id="birthdayMusic" src="sagynysh.mp3" loop preload="auto"></audio>
+
+<!-- ҚҰТТЫҚТАУ ХАТЫ -->
+<div class="modal" id="letterModal">
+    <div class="letter">
+
+        <div class="letter-heart">♡</div>
+
+        <h2>Ақнұрға...</h2>
+
+        <p>
+            Бүгінгі туған күнің құтты болсын! 🌸<br><br>
+
+            Өмірің әдемі естеліктерге,<br>
+            шынайы күлкіге және бақытты сәттерге толы болсын.
+            Әрдайым өзіңдей ерекше болып қал.
+            Алдыңнан тек жақсы адамдар кездесіп,
+            ойлаған армандарың бірінен соң бірі орындалсын.<br><br>
+
+            Бүгін де, ертең де күлімдеп жүр. 🩷
+        </p>
+
+        <button class="btn primary" id="closeLetter">
+            Рақмет ♡
+        </button>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<script>
+(() => {
+    const canvas = document.getElementById('space');
+
+    if (!window.THREE) {
+        document.querySelector('.hint').textContent =
+            '3D көрініс үшін интернетті қосып, бетті қайта аш.';
+        return;
+    }
+
+    // СЦЕНА
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+        45,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+    );
+
+    camera.position.z = 43;
+
+    const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true
+    });
+
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio || 1, 2)
+    );
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // НЕГІЗГІ ОБЪЕКТІЛЕР
+    const universe = new THREE.Group();
+    scene.add(universe);
+
+    const heartGroup = new THREE.Group();
+    universe.add(heartGroup);
+
+    // ҚЫЗҒЫЛТ 3D ЖҮРЕКТІҢ БӨЛШЕКТЕРІ
+    const heartCount = 3300;
+    const heartPositions = [];
+    const heartColors = [];
+    const sizes = [];
+
+    const color1 = new THREE.Color('#ff54bf');
+    const color2 = new THREE.Color('#ffd5f0');
+    const color3 = new THREE.Color('#ff168c');
+
+    // Жүректің математикалық пішіні
+    function heartPoint(t) {
+        const x = 16 * Math.pow(Math.sin(t), 3);
+
+        const y =
+            13 * Math.cos(t)
+            - 5 * Math.cos(2 * t)
+            - 2 * Math.cos(3 * t)
+            - Math.cos(4 * t);
+
+        return { x, y };
+    }
+
+    for (let i = 0; i < heartCount; i++) {
+        const t = Math.random() * Math.PI * 2;
+
+        const outline = heartPoint(t);
+
+        // Бөлшектер жүректің ішін де толтырады
+        const scale = Math.sqrt(Math.random());
+
+        const x = outline.x * scale;
+        const y = outline.y * scale;
+
+        // Жүрекке 3D тереңдік беру
+        const depth =
+            Math.sqrt(Math.max(0, 1 - scale * scale));
+
+        const z = (Math.random() - 0.5) * 2 * depth * 5.2;
+
+        heartPositions.push(
+            x * 0.65,
+            y * 0.65,
+            z
+        );
+
+        let c;
+
+        const r = Math.random();
+
+        if (r < 0.2) {
+            c = color2;
+        } else if (r < 0.6) {
+            c = color1;
+        } else {
+            c = color3;
+        }
+
+        heartColors.push(c.r, c.g, c.b);
+        sizes.push(Math.random());
+    }
+
+    const heartGeometry = new THREE.BufferGeometry();
+
+    heartGeometry.setAttribute(
+        'position',
+        new THREE.Float32BufferAttribute(heartPositions, 3)
+    );
+
+    heartGeometry.setAttribute(
+        'color',
+        new THREE.Float32BufferAttribute(heartColors, 3)
+    );
+
+    const heartMaterial = new THREE.PointsMaterial({
+        size: 0.09,
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.96,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        sizeAttenuation: true
+    });
+
+    const heartParticles = new THREE.Points(
+        heartGeometry,
+        heartMaterial
+    );
+
+    heartGroup.add(heartParticles);
+
+    // СЫРТЫНДАҒЫ ЖҰҚА ЖАРҚЫРАҒАН ЖҮРЕК
+    const outlinePoints = [];
+
+    for (let i = 0; i <= 250; i++) {
+        const t = (i / 250) * Math.PI * 2;
+        const p = heartPoint(t);
+
+        outlinePoints.push(
+            p.x * 0.65,
+            p.y * 0.65,
+            0
+        );
+    }
+
+    const outlineGeometry = new THREE.BufferGeometry();
+
+    outlineGeometry.setAttribute(
+        'position',
+        new THREE.Float32BufferAttribute(outlinePoints, 3)
+    );
+
+    const outlineMaterial = new THREE.LineBasicMaterial({
+        color: 0xff93d7,
+        transparent: true,
+        opacity: 0.42
+    });
+
+    const outline = new THREE.Line(
+        outlineGeometry,
+        outlineMaterial
+    );
+
+    heartGroup.add(outline);
+
+    // АЙНАЛАТЫН НЕОН САҚИНАЛАР
+    const ring1 = new THREE.Mesh(
+        new THREE.TorusGeometry(12.7, 0.025, 8, 180),
+        new THREE.MeshBasicMaterial({
+            color: 0xff65c6,
+            transparent: true,
+            opacity: 0.55
+        })
+    );
+
+    ring1.scale.set(1, 0.42, 1);
+    ring1.rotation.x = 0.85;
+    ring1.rotation.y = 0.35;
+    universe.add(ring1);
+
+    const ring2 = new THREE.Mesh(
+        new THREE.TorusGeometry(14, 0.018, 8, 180),
+        new THREE.MeshBasicMaterial({
+            color: 0xffb9e4,
+            transparent: true,
+            opacity: 0.28
+        })
+    );
+
+    ring2.scale.set(1, 0.57, 1);
+    ring2.rotation.x = -0.75;
+    ring2.rotation.y = 0.6;
+    universe.add(ring2);
+
+    // АЛЫСТАҒЫ ЖҰЛДЫЗДАР
+    const starPositions = [];
+    const starColors = [];
+
+    for (let i = 0; i < 1300; i++) {
+        starPositions.push(
+            (Math.random() - 0.5) * 90,
+            (Math.random() - 0.5) * 90,
+            (Math.random() - 0.5) * 70
+        );
+
+        const c = Math.random() > 0.5
+            ? new THREE.Color('#ffb9e6')
+            : new THREE.Color('#ffffff');
+
+        starColors.push(c.r, c.g, c.b);
+    }
+
+    const starGeometry = new THREE.BufferGeometry();
+
+    starGeometry.setAttribute(
+        'position',
+        new THREE.Float32BufferAttribute(starPositions, 3)
+    );
+
+    starGeometry.setAttribute(
+        'color',
+        new THREE.Float32BufferAttribute(starColors, 3)
+    );
+
+    const stars = new THREE.Points(
+        starGeometry,
+        new THREE.PointsMaterial({
+            size: 0.075,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.75,
+            depthWrite: false,
+            sizeAttenuation: true
+        })
+    );
+
+    scene.add(stars);
+
+    // ЖҮРЕКТІ САҒУСАҚПЕН АЙНАЛДЫРУ
+    let dragging = false;
+    let previousX = 0;
+    let previousY = 0;
+
+    let targetRotationY = 0;
+    let targetRotationX = 0;
+
+    canvas.addEventListener('pointerdown', (event) => {
+        dragging = true;
+
+        previousX = event.clientX;
+        previousY = event.clientY;
+
+        canvas.setPointerCapture(event.pointerId);
+    });
+
+    canvas.addEventListener('pointermove', (event) => {
+        if (!dragging) return;
+
+        const dx = event.clientX - previousX;
+        const dy = event.clientY - previousY;
+
+        targetRotationY += dx * 0.009;
+        targetRotationX += dy * 0.006;
+
+        previousX = event.clientX;
+        previousY = event.clientY;
+    });
+
+    canvas.addEventListener('pointerup', () => {
+        dragging = false;
+    });
+
+    canvas.addEventListener('pointercancel', () => {
+        dragging = false;
+    });
+
+    // ТЕГІН ҰШАТЫН ҰСАҚ ЖҮРЕКТЕР
+    function createFloatingHeart() {
+        const heart = document.createElement('div');
+
+        heart.className = 'float-heart';
+
+        heart.textContent = Math.random() > 0.5 ? '♡' : '✧';
+
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = (60 + Math.random() * 30) + 'vh';
+
+        heart.style.fontSize =
+            (12 + Math.random() * 22) + 'px';
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+    }
+
+    setInterval(createFloatingHeart, 500);
+
+    // МУЗЫКА
+    const audio = document.getElementById('birthdayMusic');
+    const musicButton = document.getElementById('musicButton');
+
+    musicButton.addEventListener('click', async () => {
+        if (audio.paused) {
+            try {
+                await audio.play();
+
+                musicButton.textContent = '♫ Әуенді тоқтату';
+            } catch (error) {
+                musicButton.textContent =
+                    'Файлды тексеріп, қайта бас';
+            }
+        } else {
+            audio.pause();
+            musicButton.textContent = '♫ Әуенді қосу';
+        }
+    });
+
+    // ХАТТЫ АШУ
+    const modal = document.getElementById('letterModal');
+
+    document.getElementById('letterButton').addEventListener(
+        'click',
+        () => {
+            modal.classList.add('show');
+
+            for (let i = 0; i < 12; i++) {
+                setTimeout(createFloatingHeart, i * 100);
+            }
+        }
+    );
+
+    document.getElementById('closeLetter').addEventListener(
+        'click',
+        () => modal.classList.remove('show')
+    );
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.classList.remove('show');
+        }
+    });
+
+    // ТЕЛЕФОН ЭКРАНЫНЫҢ ӨЛШЕМІ
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+
+        renderer.setPixelRatio(
+            Math.min(window.devicePixelRatio || 1, 2)
+        );
+    });
+
+    // НЕГІЗГІ АНИМАЦИЯ
+    const clock = new THREE.Clock();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        const time = clock.getElapsedTime();
+
+        // Жүрек ақырын айналады
+        if (!dragging) {
+            targetRotationY += 0.003;
+            targetRotationX +=
+                Math.sin(time * 0.35) * 0.0008;
+        }
+
+        heartGroup.rotation.y +=
+            (targetRotationY - heartGroup.rotation.y) * 0.07;
+
+        heartGroup.rotation.x +=
+            (targetRotationX - heartGroup.rotation.x) * 0.07;
+
+        // Жүректің соғуы
+        const pulse = 1 + Math.sin(time * 2.2) * 0.025;
+
+        heartGroup.scale.set(pulse, pulse, pulse);
+
+        // Сақиналар қозғалысы
+        ring1.rotation.z = time * 0.13;
+        ring2.rotation.z = -time * 0.09;
+
+        // Ғарыш ақырын қозғалады
+        stars.rotation.y = time * 0.009;
+        stars.rotation.x = Math.sin(time * 0.1) * 0.04;
+
+        // Жарық біртіндеп өзгереді
+        heartMaterial.opacity =
+            0.78 + Math.sin(time * 2) * 0.18;
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+})();
+</script>
+
+</body>
+</html>
